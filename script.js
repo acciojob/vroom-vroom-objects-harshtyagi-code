@@ -1,40 +1,31 @@
-class Person {
-  // Constructor that accepts name and age
-  constructor(name, age) {
-    this.name = name;
-    this.age = age;
-  }
-
-  // Method that prints a greeting message
-  greet() {
-    console.log(`Hello, my name is ${this.name}, I am ${this.age} years old.`);
-  }
+ // Complete the js code
+function Car(make, model) {
+  this.make = make;
+  this.model = model;
 }
 
-// Create an Employee class that inherits from Person
-class Employee extends Person {
-  // Constructor that accepts name, age, and jobTitle
-  constructor(name, age, jobTitle) {
-    // Call the parent constructor with name and age
-    super(name, age);
-    this.jobTitle = jobTitle;
-  }
+// Adding a method to the Car prototype
+Car.prototype.getMakeModel = function () {
+  return `${this.make} ${this.model}`;
+};
 
-  // Method that prints a job-specific greeting message
-  jobGreet() {
-    console.log(
-      `Hello, my name is ${this.name}, I am ${this.age} years old, and my job title is ${this.jobTitle}.`
-    );
-  }
+// Constructor function for SportsCar, inheriting from Car
+function SportsCar(make, model, topSpeed) {
+  // Call the Car constructor using SportsCar's context
+  super(make, model);
+  this.topSpeed = topSpeed;
 }
 
-// Example test case
-// Create a Person instance with name Alice and age 25
-let alice = new Person("Alice", 25);
-// Call the greet method
-alice.greet(); // Hello, my name is Alice, I am 25 years old.
+// Inherit the Car prototype in the SportsCar prototype
+SportsCar.prototype = Object.create(Car.prototype);
 
-// Create an Employee instance with name Bob, age 30, and job title Manager
-let bob = new Employee("Bob", 30, "Manager");
-// Call the jobGreet method
-bob.jobGreet(); // Hello, my name is Bob, I am 30 years o
+// Set the constructor property back to SportsCar
+SportsCar.prototype.constructor = SportsCar;
+
+// Adding a method to the SportsCar prototype
+SportsCar.prototype.getTopSpeed = function () {
+  return this.topSpeed;
+};
+// Do not change the code below
+window.Car = Car;
+window.SportsCar = SportsCar;
